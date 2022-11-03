@@ -1,0 +1,471 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500;700;900&display=swap');
+@import "nullstyle.scss";
+
+@mixin flexx($aItems: stretch, $jContent: flex-start, $fDirection: row, $cGap: 0, $rGap: 0){
+    display: flex;
+    align-items: $aItems;
+    justify-content: $jContent;
+    flex-direction: $fDirection;
+    column-gap: $cGap;
+    row-gap: $rGap;
+}
+
+@mixin fontt($fSize, $fWeight, $lHeight, $fTrans: none, $fColor){
+    font-size: $fSize;
+    font-weight: $fWeight;
+    line-height: $lHeight;
+    text-transform: $fTrans;
+    color: $fColor;
+}
+
+@mixin caruselPos($btm, $lft, $transX, $transY){
+    position: absolute;
+    bottom: $btm;
+    left: $lft;
+    transform: translate($transX, $transY);
+}
+
+
+.btn{
+    position: relative;
+    padding: 12px 19px 12px 34px;
+    border-radius: 10px;
+    @include fontt(22px, 500, 40px, capitalize, #fff);
+    background-color: #717CFF;
+    & span{
+        display: inline-block;
+        margin-left: 36px;
+        width: 18px;
+        height: 16px;
+        background: url(./img/iconAndlogo/arrow_forward_24px.svg) no-repeat;
+    }
+}
+
+.section__title{
+    @include fontt(37px, 700, 54px, capitalize, #373737);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.section__subtitle{
+    @include fontt(22px, 500, 38px, none, #7d7d7d);
+    text-align: center;
+}
+
+.carusel-control{
+    @include flexx($aItems: center, $cGap: 20px);
+    &__button:first-child{
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background-color: #717CFF;
+    }
+    &__button:nth-last-child(-n+3){
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #7C7C7C;
+        transition: .2s linear;
+        &:hover{
+            width: 14px;
+            height: 14px;
+            background-color: #717CFF;
+        }
+    }
+}
+
+.read-more__link{
+    @include flexx($aItems: center);
+    @include fontt(17px, 700, 19.92px, capitalize, #717CFF);
+    transition: .2s linear;
+    & span{
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background: url(./img/iconAndlogo/arrow_forward_24px.svg) no-repeat;
+        background-size: 100%;
+        margin-left: 21px;
+    }
+}
+
+.section__bg{
+    background-color: #FAFAFA;
+}
+
+
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
+header, section, footer{
+    padding: 0 calc(50vw - (1180px / 2));
+}
+
+header{
+    margin-top: 40px;
+    @include flexx(center, space-between);
+    background-color: white;
+    position: sticky;
+    top: 0;
+    & .navigationAndButton{
+        @include flexx(center, flex-start, row, 72px);
+        & a{
+            @include fontt(17px, 500, 19.92px, capitalize, #373737);
+        }
+        & a:not(a.navigationAndButton__btn){
+            position: relative;
+            padding-bottom: 6px;
+            &::before{
+                content: '';
+                position: absolute;
+                bottom: 0;
+                width: 0px;
+                height: 2px;
+                background-color: #717CFF;
+                transition: .3s linear;
+            }
+            &:hover::before{
+                width: 100%;
+            }
+        }
+        &__navbar{
+            &__navlist{
+                @include flexx(center, flex-start, row, 73px);
+            }
+        }
+        &__btn{
+            padding: 10px 33px;
+            border: 2px solid #717CFF;
+            border-radius: 10px;
+            transition: .3s linear;
+            &:hover{
+                background-color: #717CFF;
+                color: #fff;
+            }
+        }
+    }
+}
+
+main{
+    & .main__page{
+        padding-top: 128px;
+        overflow: hidden;
+        @include flexx();
+        &__textside{
+            width: 50%;
+            &__title{
+                @include fontt(56px, 900, 66px, none, #2f2f2f);
+                margin-bottom: 53px;
+                & span{
+                    color: #717CFF; 
+                }
+            }
+            &__subtitle{
+                @include fontt(22px, 500, 38px, none, #7d7d7d);
+                margin-bottom: 42px;
+            }
+            &__social{
+                margin-top: 100px;
+                @include flexx($aItems: center, $cGap: 23px);
+                & a:nth-child(1) svg{
+                   stroke: #000;
+                   transition: .2s linear;
+                   &:hover{
+                    fill: #3C5B9A;
+                    stroke: none;
+                   }
+                }
+                & a:nth-last-child(-n+2) svg{
+                    fill: #000;
+                    transition: .2s linear;
+                    &:hover{
+                        fill: #3f729b;
+                    }
+                }
+            }
+        }
+        &__imgside{
+            width: 50%;
+            background: url(./img/images/headpagebg.jpg) no-repeat;
+            background-position: 55px 110px;
+            background-size: 100%;    
+        }
+    }
+    & .featured{
+        position: relative;
+        padding-top: 55px;
+        padding-bottom: 55px;
+        &__title{
+            @include fontt(23px, 500, 26.95px, uppercase, #373737);
+            text-align: center;
+            margin-bottom: 86px;
+        }
+        &__universities-block{
+            @include flexx($jContent: space-between);
+            margin-bottom: 105px;
+            & img{
+                width: 250px;
+                height: 64px;
+            }
+        }
+        & .carusel-control{
+            @include caruselPos(13.47%, 50%, -50%, -13.47%);
+        }
+    }
+    & .our__services{
+        padding-top: 122px;
+        padding-bottom: 125px;
+        &__subtitle{
+            margin-bottom: 110px;
+        }
+        &__card-block{
+            @include flexx($jContent: center, $cGap: 47px, $rGap: 56px);
+            flex-wrap: wrap;
+            &__card{
+                width: calc(100% / 3 - 94px);
+                padding: 30px 16px 30px 30px;
+                border-radius: 10px;
+                box-shadow: 0px 0px 15px 0px lightgray;
+                cursor: pointer;
+                &__card-imgbox{
+                    @include flexx(center, center);
+                    width: 75px;
+                    height: 75px;
+                    border-radius: 50%;
+                    margin-bottom: 30px;
+                }
+                &__content{
+                    &__title{
+                        @include fontt(24px, 700, 37px, capitalize, #37474F);
+                        margin-bottom: 9px;
+                    }
+                    &__subtitle{
+                        @include fontt(16px, 500, 28px,  none, #37474F);
+                        opacity: .6;
+                        letter-spacing: .44px;
+                        margin-bottom: 25px;
+                    }
+                }
+                &:nth-child(1) .our__services__card-block__card__card-imgbox{
+                    background: #717CFF;
+                }
+                &:nth-child(2) .our__services__card-block__card__card-imgbox{
+                    background: #FF5959;
+                }
+                &:nth-child(3) .our__services__card-block__card__card-imgbox{
+                    background: #70CE88;
+                }
+                &:nth-child(4) .our__services__card-block__card__card-imgbox{
+                    background: #5C96FF;
+                }
+                &:nth-child(5) .our__services__card-block__card__card-imgbox{
+                    background: #FA706C;
+                }
+            }
+        }
+    }
+    & .news{
+        position: relative;
+        padding-top: 102px;
+        padding-bottom: 124px;
+        &__subtitle{
+            margin-bottom: 119px;
+        }
+        &__card-block{
+            @include flexx($jContent: space-between);
+            flex-wrap: wrap;
+            margin-bottom: 146px;
+            &__card{
+                width: calc(100% / 3 - 46px);
+                border-radius: 10px;
+                overflow: hidden;
+                &__txtcontent{
+                    padding: 28px 26px 62px;
+                    &__date{
+                        @include flexx($aItems: center, $cGap: 12px);
+                        margin-bottom: 15px;
+                        & span{
+                            @include fontt(16px, 900, 18.75px, capitalize, #565656);
+                        }                
+                       }
+                       &__newsName{
+                        @include fontt(22px, 700, 25.78px, capitalize, #252525);
+                       }
+                }
+            }
+        }
+        .btn{
+            @include caruselPos(11.07%, 50%, -50%, -11.07%);
+        }
+    }
+    & .upcoming{
+        position: relative;
+        padding-top: 98px;
+        padding-bottom: 108px;
+        &__subtitle{
+            margin-bottom: 100px;
+        }
+        &__content{
+            @include flexx($jContent: space-between);
+            margin-bottom: 80px;
+            &__card{
+                width: calc(100% / 2 - 47px);
+                padding: 30px 28px 33px 31px;
+                box-shadow: 0px 0px 15px 0px lightgray;
+                border-radius: 10px;
+                &__top{
+                    @include flexx($cGap: 19px);
+                    margin-bottom: 28px;
+                    &__day{
+                        width: 76px;
+                        height: 76px;
+                        @include flexx(center, center, column);
+                        border-radius: 10px;
+                        background-color: #CBCFFF;
+                        & span:nth-of-type(1){
+                            @include fontt(27px, 700, 31.64px, none, #717CFF);
+                        }
+                        & span:nth-of-type(2){
+                            @include fontt(18px, 900, 21px, none, #717CFF);
+                        }
+                    }
+                    &__text{
+                        @include fontt(24px, 700, 37px, capitalize, #37474F);
+                    }
+                }
+                &__txt{
+                    @include fontt(16px, 500, 28px, none, #37474FB8);
+                    letter-spacing: 0.444444px;
+                    margin-bottom: 25px;
+                }
+                &__bottom{
+                    @include flexx(center, space-between);
+                    &__time{
+                        @include flexx($aItems:center, $cGap: 10px);
+                        &__details{
+                            @include fontt(16px, 900, 28px, none, #373737);
+                        }
+                    }
+                }
+            }
+        }
+        & .carusel-control{
+            @include caruselPos(12.44%, 50%, -50%, -12.44%);
+        }
+    }
+    & .countries{
+        position: relative;
+        padding-top: 82px; 
+        padding-bottom: 136px;
+        &__subtitle{
+            margin-bottom: 77px;
+        }
+        &__card-block{
+            @include flexx($jContent: space-between);
+            flex-wrap: wrap;
+            margin-bottom: 70px;
+            &__card{
+                width: calc(100% / 3 - 92px);
+                &__img{
+                    border-radius: 30px;
+                    margin-bottom: 27px;
+                }
+                &__txtcontent{
+                    &__title{
+                        @include fontt(25px, 900, 29px, none, #37474F);
+                        margin-bottom: 11px;
+                    }
+                    &__subtitle{
+                        @include fontt(16px, 500, 27px, none, #37474FB8);
+                    }
+                }
+            }
+        }
+        & .carusel-control{
+            @include caruselPos(15.77%, 50%, -50%, -15.77%);
+        }
+    }
+    & .testimonials{
+        position: relative;
+        padding-top: 115px;
+        padding-bottom: 98px;
+        &__subtitle{
+            margin-bottom: 142px;
+        }
+        &__card-block{
+            @include flexx($jContent: space-between);
+            flex-wrap: wrap;
+            margin-bottom: 130px;
+            &__card{
+                width: calc(100% / 3 - 25px);
+                padding: 39px 34px 46px;
+                &__top{
+                    @include flexx($aItems: center, $cGap: 28px);
+                    margin-bottom: 30px;
+                    & img{
+                        border-radius: 12px;
+                    }
+                    &__info{
+                        & p:nth-child(1){
+                            @include fontt(22px, 900, 26px, capitalize, #37474F);
+                        }
+                        & p:nth-child(2){
+                            @include fontt(18px, 500, 21px, capitalize, #37474F);
+                            opacity: .65;
+                        }
+                    }
+                }
+                & blockquote{
+                    @include fontt(18px, 500, 31px, none, #37474FB8);
+                }
+            }
+        }
+        & .carusel-control{
+            @include caruselPos(10.38%, 50%, -50%, -10.38%);
+        }
+    }
+    & .apply__online{
+        padding-top: 92px;
+        padding-bottom: 85px;
+        @include flexx($aItems: center, $jContent: space-between);
+        &__txt{
+            @include fontt(37px, 700, 43px, none, #252525);
+        }
+    }
+}
+
+.footer__bg{
+    background: #717CFF;
+}
+footer{
+    padding-top: 65px;
+    padding-bottom: 45px;
+    @include flexx($aItems: center, $jContent: space-between);
+    & .info{
+        max-width: 343px;
+        &__logolink{
+            margin-bottom: 25px;
+        }
+        &__adress{
+            @include fontt(18px, 500, 32px, none, #EEEEEE);
+            font-style: normal;
+            margin-bottom: 58px;
+        }
+        &__copyright{
+            @include fontt(18px, 700, 32px, none, #EEEEEE);
+        }
+    }
+    & .links{
+        @include flexx($cGap: 105px);
+        & ul li a{
+            @include fontt(18px, 500, 49px, capitalize, #EEEEEE);
+        }
+    }
+    & .footer__social{
+        @include flexx(center, center, $cGap: 28px);
+        align-self: flex-end;
+        & a svg{
+            fill: white;
+        }
+    }
+}
